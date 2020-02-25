@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack</title>
+</head>
+<style>
+
+    .player {
+        border: 5px solid #09dce4;
+        display: grid;
+        grid-template-rows: auto auto;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+    
+</style>
+
+<body>
+
+            <img src="cartas/BlackJackT.gif" alt="" style="text-align: center;">
+            <br>
+
+            Nombre: <input type="text" id="jugador">
+            <button id="ingresar">Ingresar</button>
+            <br>
+            <p id="error" style="color: red;"></p>
+   
+            <p id="nombre"></p>
+            <p id="cartaJugador">Carta del Jugador:</p>
+
+            <br>
+
+            <img src="cartas/B0.gif" id="cambioCarta" style="width: 140px; height: 80;">
+            <div id='cartasJugadasJugador' class="player"></div>
+            <br>
+            <button id="pedirCarta">Pedir carta</button>
+         
+    
+</body>
+
+<script src="js/jugador.js"></script>
+<script src="js/mazo.js"></script>
+<script src="js/carta.js"></script>
+<script src="js/palo.js"></script>
+<script src="js/fabricaDeCartas.js"></script>
+
+<script>
+    
+    
+    var x = 2;
+    var nuevo = new FabricaDeCartas();
+
+    nuevo.crear(x);
+    nuevo.mazo;
+
+    var empezar = new Juego();
+    empezar.mezclarMezcla(nuevo.mazo);
+
+    document.getElementById('ingresar').addEventListener('click', function() {
+        var nombreJugador = document.getElementById('jugador').value;
+        if (nombreJugador === '') {
+            document.getElementById('error').innerHTML = 'Debe Ingresar el nombre del jugador';
+        } else {
+            console.log(nombreJugador);
+        
+            var jugador = new Jugador(nombreJugador);
+            document.getElementById('nombre').innerHTML = 'Jugador: ' + jugador.nombre;
+        }
+    });
+
+    document.getElementById('pedirCarta').addEventListener('click', function() {
+        nuevo.pedir(nuevo.mazo);
+    });
+
+</script>
+
+</html>
